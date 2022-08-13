@@ -1,0 +1,58 @@
+<form [formGroup]="detailForm">
+  <mat-form-field>
+    <mat-label>ID</mat-label>
+    <input
+      matInput
+      placeholder="id"
+      formControlName="id"
+      type="text"
+      name="id"
+      readonly
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Date</mat-label>
+    <input
+      matInput
+      placeholder="date"
+      formControlName="date"
+      type="text"
+      name="date"
+      readonly
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>comment</mat-label>
+    <input
+      matInput
+      placeholder="Write your comment"
+      formControlName="comment"
+      type="text"
+      name="comment"
+    />
+    <mat-error
+      *ngIf="
+        detailForm.get('comment').hasError('required') &&
+        detailForm.get('comment').touched
+      "
+      >Comment is required</mat-error
+    >
+    <mat-error
+      *ngIf="
+        detailForm.get('comment').hasError('pattern') &&
+        detailForm.get('comment').touched
+      "
+      >Only alphanumeric allowed
+    </mat-error>
+  </mat-form-field>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!detailForm.valid"
+    (click)="updateComment()"
+  >
+    Update
+  </button>
+</form>
